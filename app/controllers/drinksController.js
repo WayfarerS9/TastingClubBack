@@ -1,7 +1,6 @@
 const mongoDB = require("../settings/mongoDB");
 
 exports.getBySearch = (req, res) => {
-  console.log(req.query)
   let results = [];
   let proj = { brand: 1, typeOfDrink: 1, name: 1 };
 
@@ -12,7 +11,7 @@ exports.getBySearch = (req, res) => {
       let cursorDrinks = drinksCollection.find().project(proj);
 
       await cursorDrinks.forEach((element) => {
-        if (element.name.toLowerCase().includes(req.query.crt.toLowerCase())) {
+        if (element.name.toLowerCase().includes(req.query.crt)) {
           results.push(element);
         }
       });
